@@ -1,4 +1,4 @@
 export enum featureStoreEnum {
-    seance = 'seance',
+    auth = 'auth',
     place = 'place'
 }

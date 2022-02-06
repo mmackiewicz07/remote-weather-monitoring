@@ -1,0 +1,56 @@
+<div class="w-100 h-100 d-flex align-items-center justify-content-center">
+    <mat-card class="user-panel">
+        <mat-card-header>
+            <h3 class="pt-3">Dane użytkownika</h3>
+        </mat-card-header>
+        <mat-card-content class="px-4">
+            <div class="container">
+                <div class="row pt-5">
+                    <div class="col">
+                        <div class="d-flex flex-column">
+                            <span>E-mail:</span>
+                            <span>{{user?.email}}</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex flex-column">
+                            <span>Data założenia konta:</span>
+                            <span>{{userCreatedAccount}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-5">
+                    <div class="col">
+                        <div class="d-flex flex-column">
+                            <span>Ostatnie logowanie:</span>
+                            <span>{{userLastLogIn}}</span>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="d-flex flex-column">
+                            <button class="w-25 mb-4" mat-raised-button color="primary"
+                                (click)="showInput = !showInput">
+                                Zmień hasło
+                            </button>
+                            <div class="d-flex flex-column" *ngIf="showInput">
+                                <span class="mb-3">Podaj nam swój adres e-mail w celu wysłania linku do resetu
+                                    hasła.</span>
+                                <form [formGroup]="form">
+                                    <mat-form-field appearance="outline" class="w-50">
+                                        <mat-label>E-mail</mat-label>
+                                        <input matInput type='text' formControlName="email">
+                                    </mat-form-field>
+                                    <mat-error *ngIf="(resetPasswordError$ | async) as error" class="pb-3">{{error}}
+                                    </mat-error>
+                                </form>
+                                <button class="w-25" mat-raised-button color="warn" (click)="changeUserPassword()">
+                                    Wyślij
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

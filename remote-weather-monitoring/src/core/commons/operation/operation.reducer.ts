@@ -34,6 +34,8 @@ const reducers = {
     };
   },
   success: <T>(state: OperationState<T>, action: SendOperationSuccessProps<T>) => {
+    console.log('state', state);
+    console.log('action', action);
     const res = action.res;
     return { res, loading: false, success: true, error: null };
   },

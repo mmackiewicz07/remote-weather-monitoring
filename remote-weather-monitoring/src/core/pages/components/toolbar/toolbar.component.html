@@ -1,8 +1,16 @@
 <mat-toolbar color="primary" class="d-flex align-items-center justify-content-beetwen">
-    <div class="d-flex h-100 align-items-center">
+    <div class="d-flex h-100 align-items-center w-50">
+        <button mat-icon-button class="mr-5" matTooltip="menu" (click)="toogleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
         <mat-icon>
             thermostat
         </mat-icon>
         <span class="px-2">Zdalny monitoring warunków atmosferycznych</span>
+    </div>
+    <div class="w-50 d-flex align-items-center justify-content-end">
+        <button mat-icon-button matTooltip="wyloguj" (click)="logout()">
+            <mat-icon>logout</mat-icon>
+        </button>
     </div>
 </mat-toolbar>
