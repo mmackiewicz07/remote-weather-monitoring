@@ -1,4 +1,5 @@
 export enum featureStoreEnum {
     auth = 'auth',
-    place = 'place'
+    place = 'place',
+    measurements = 'measurements'
 }

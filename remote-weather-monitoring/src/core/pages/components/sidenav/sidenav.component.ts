@@ -9,7 +9,8 @@ export class SidenavComponent {
 
   public sideNavOptions = [
     { icon: 'assessment', text: 'Pomiary', link: './pomiary' },
-    { icon: 'person', text: 'Użytkownik', link: './uzytkownik' }
+    { icon: 'person', text: 'Użytkownik', link: './uzytkownik' },
+    { icon: 'history', text: 'Historia pomiarów', link: './historia-pomiarów' }
   ]
 
   constructor() { }

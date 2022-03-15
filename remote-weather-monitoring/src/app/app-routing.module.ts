@@ -4,6 +4,7 @@ import { HomeComponent } from 'src/core/pages/home/home.component';
 import { LoginPageComponent } from 'src/core/pages/login-page/login-page.component';
 import { MainPageComponent } from 'src/core/pages/main-page/main-page.component';
 import { ResetPasswordComponent } from 'src/core/pages/reset-password/reset-password.component';
+import { MeasurementsHistoryComponent } from './measurements-history/measurements-history.component';
 import { MeasurementsComponent } from './measurements/measurements.component';
 import { AuthGuard } from './services/auth.guard';
 import { UserComponent } from './user/user.component';
@@ -38,6 +39,10 @@ const routes: Routes = [
     {
       path: 'pomiary',
       component: MeasurementsComponent,
+    },
+    {
+      path: 'historia-pomiarów',
+      component: MeasurementsHistoryComponent,
     }]
   },
 ];

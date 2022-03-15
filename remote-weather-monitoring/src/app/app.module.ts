@@ -12,16 +12,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireDatabaseModule, USE_EMULATOR } from '@angular/fire/compat/database';
 import { UserComponent } from './user/user.component';
-import { MeasurementsComponent } from './measurements/measurements.component';
+import { MeasurementsModule } from './measurements/measurements.module';
+import { MeasurementsHistoryComponent } from './measurements-history/measurements-history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    MeasurementsComponent
+    MeasurementsHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +33,7 @@ import { MeasurementsComponent } from './measurements/measurements.component';
     CoreModule,
     AppStoreModule,
     HttpClientModule,
+    MeasurementsModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyC4QjmNWMTP9TNjGC1TGdOfzuej3GVGSEU",
       authDomain: "remote-weather-monitoring.firebaseapp.com",
@@ -42,10 +44,13 @@ import { MeasurementsComponent } from './measurements/measurements.component';
       appId: "1:1020522371565:web:6a30d09665515ae34e2fe4",
       measurementId: "G-W2HZR78LJT"
     }),
+    AngularFireDatabaseModule,
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
