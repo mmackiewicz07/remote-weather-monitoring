@@ -24,7 +24,10 @@ const reducers = {
       error: null,
     };
   },
-  fail: <T>(state: OperationState<T>, action: SendOperationFailProps): OperationState<T> => {
+  fail: <T>(
+    state: OperationState<T>,
+    action: SendOperationFailProps
+  ): OperationState<T> => {
     const error = action.error;
     return {
       ...state,
@@ -33,9 +36,10 @@ const reducers = {
       success: false,
     };
   },
-  success: <T>(state: OperationState<T>, action: SendOperationSuccessProps<T>) => {
-    console.log('state', state);
-    console.log('action', action);
+  success: <T>(
+    state: OperationState<T>,
+    action: SendOperationSuccessProps<T>
+  ) => {
     const res = action.res;
     return { res, loading: false, success: true, error: null };
   },
@@ -50,7 +54,10 @@ const reducers = {
   },
 };
 
-export const operationReducer = <T>(actionsMap: OperationReducerActionsMap, initialState?: OperationState<T>) => {
+export const operationReducer = <T>(
+  actionsMap: OperationReducerActionsMap,
+  initialState?: OperationState<T>
+) => {
   initialState = initialState || {};
   return createReducer(
     initialState,
@@ -70,33 +77,51 @@ export const operationReducerById = <T, P>(
   initialState = initialState || {};
   return createReducer(
     initialState,
-    on(actionsMap.send, (state: StateById<OperationState<T>>, action: SendOperationProps<T>) => {
-      const id: any = action?.id;
-      return {
-        ...state,
-        [id]: reducers.send(state[id]),
-      };
-    }),
-    on(actionsMap.fail, (state: StateById<OperationState<T>>, action: SendOperationFailProps) => {
-      const id: any = action?.id;
-      return {
-        ...state,
-        [id]: reducers.fail(state[id], action),
-      };
-    }),
-    on(actionsMap.success, (state: StateById<OperationState<T>>, action: SendOperationSuccessProps<T>) => {
-      const id: any = action?.id;
-      return {
-        ...state,
-        [id]: reducers.success(state[id], action),
-      };
-    }),
-    on(actionsMap.clear, (state: StateById<OperationState<T>>, action: SendOperationClearProps) => {
-      const id: any = action?.id;
-      return {
-        ...state,
-        [id]: reducers.clear(state[id]),
-      };
-    })
+    on(
+      actionsMap.send,
+      (state: StateById<OperationState<T>>, action: SendOperationProps<T>) => {
+        const id: any = action?.id;
+        return {
+          ...state,
+          [id]: reducers.send(state[id]),
+        };
+      }
+    ),
+    on(
+      actionsMap.fail,
+      (state: StateById<OperationState<T>>, action: SendOperationFailProps) => {
+        const id: any = action?.id;
+        return {
+          ...state,
+          [id]: reducers.fail(state[id], action),
+        };
+      }
+    ),
+    on(
+      actionsMap.success,
+      (
+        state: StateById<OperationState<T>>,
+        action: SendOperationSuccessProps<T>
+      ) => {
+        const id: any = action?.id;
+        return {
+          ...state,
+          [id]: reducers.success(state[id], action),
+        };
+      }
+    ),
+    on(
+      actionsMap.clear,
+      (
+        state: StateById<OperationState<T>>,
+        action: SendOperationClearProps
+      ) => {
+        const id: any = action?.id;
+        return {
+          ...state,
+          [id]: reducers.clear(state[id]),
+        };
+      }
+    )
   );
 };

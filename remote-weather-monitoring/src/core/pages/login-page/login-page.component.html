@@ -1,57 +1,129 @@
-<div class="w-100 h-100 login-page__background d-flex align-items-center justify-content-center">
-    <form [formGroup]="form">
-        <div class="login-page__form-container d-flex flex-column align-items-center justify-content-center">
-            <mat-icon class="text-white mb-4 login-page__icon">
-                beach_access
-            </mat-icon>
-            <mat-form-field appearance="outline" class="w-75">
-                <mat-label>Enter your email</mat-label>
-                <input formControlName="login" matInput type="email" required>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="w-75">
-                <mat-label>Enter your password</mat-label>
-                <input formControlName="password" matInput [type]="hide ? 'password' : 'text'" required>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
-                    <mat-icon class="text-white">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-            </mat-form-field>
-            <mat-form-field *ngIf="signUpClicked" appearance="outline" class="w-75">
-                <mat-label>Repeat your password</mat-label>
-                <input formControlName="reapeatedPassword" matInput [type]="hide ? 'password' : 'text'" required>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
-                    <mat-icon class="text-white">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button>
-            </mat-form-field>
-            <mat-error
-                *ngIf="(loginErrorMessage$ | async) || (registerError$ | async) || ((form.hasError('notSame') && signUpClicked))"
-                class="d-flex align-items-center justify-content-center w-100 p-2 text-center">{{(loginErrorMessage$ |
-                async) || (registerError$ | async) || 'Password and Repeated password must be the same.'}}</mat-error>
-            <button *ngIf="!signUpClicked" [disabled]="checkLogInValidation()" mat-raised-button color="primary"
-                class="login-page__login-button" (click)="signIn()">
-                <div class="w-100 d-flex align-items-center justify-content-center">
-                    <span *ngIf="(loginLoading$ | async) === false else spinner">Log in</span>
-                </div>
-            </button>
-            <button *ngIf="!signUpClicked" mat-button color="primary" class="login-page__login-button my-3"
-                (click)="signUpSwitch()">Sign
-                up</button>
-            <button *ngIf="!signUpClicked" mat-button color="warn" class="login-page__login-button my-3"
-                (click)="goToResetPasswordPage()">Reset password
-            </button>
-            <button *ngIf="signUpClicked" [disabled]="checkSignUpValidation()" mat-raised-button color="primary"
-                class="login-page__login-button my-3" (click)="signUp()">
-                <div class="w-100 d-flex align-items-center justify-content-center">
-                    <span *ngIf="(registerLoading$ | async) === false else spinner">Sign up</span>
-                </div>
-            </button>
-            <button *ngIf="signUpClicked" mat-button color="primary" class="login-page__login-button my-3"
-                (click)="signUpSwitch()">Go back to log in</button>
+<div
+  class="w-100 h-100 login-page__background d-flex align-items-center justify-content-center"
+>
+  <form [formGroup]="form">
+    <div
+      class="login-page__form-container d-flex flex-column align-items-center justify-content-center"
+    >
+      <mat-icon class="text-white mb-4 login-page__icon">
+        beach_access
+      </mat-icon>
+      <mat-form-field appearance="outline" class="w-75">
+        <mat-label>Email</mat-label>
+        <input formControlName="login" matInput type="email" required />
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-75">
+        <mat-label>Hasło</mat-label>
+        <input
+          formControlName="password"
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon class="text-white">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field *ngIf="signUpClicked" appearance="outline" class="w-75">
+        <mat-label>Powtórz hasło</mat-label>
+        <input
+          formControlName="reapeatedPassword"
+          matInput
+          [type]="hide ? 'password' : 'text'"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon class="text-white">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-error
+        *ngIf="
+          (loginErrorMessage$ | async) ||
+          (registerError$ | async) ||
+          (form.hasError('notSame') && signUpClicked)
+        "
+        class="d-flex align-items-center justify-content-center w-100 p-2 text-center"
+        >{{
+          (loginErrorMessage$ | async) ||
+            (registerError$ | async) ||
+            "Password and Repeated password must be the same."
+        }}</mat-error
+      >
+      <button
+        *ngIf="!signUpClicked"
+        [disabled]="checkLogInValidation()"
+        mat-raised-button
+        color="primary"
+        class="login-page__login-button"
+        (click)="signIn()"
+      >
+        <div class="w-100 d-flex align-items-center justify-content-center">
+          <span *ngIf="(loginLoading$ | async) === false; else spinner"
+            >Zaloguj</span
+          >
         </div>
-    </form>
+      </button>
+      <button
+        *ngIf="!signUpClicked"
+        mat-button
+        color="primary"
+        class="login-page__login-button my-3"
+        (click)="signUpSwitch()"
+      >
+        Rejestracja
+      </button>
+      <button
+        *ngIf="!signUpClicked"
+        mat-button
+        color="warn"
+        class="login-page__login-button my-3"
+        (click)="goToResetPasswordPage()"
+      >
+        Resetuj hasło
+      </button>
+      <button
+        *ngIf="signUpClicked"
+        [disabled]="checkSignUpValidation()"
+        mat-raised-button
+        color="primary"
+        class="login-page__login-button my-3"
+        (click)="signUp()"
+      >
+        <div class="w-100 d-flex align-items-center justify-content-center">
+          <span *ngIf="(registerLoading$ | async) === false; else spinner"
+            >Sign up</span
+          >
+        </div>
+      </button>
+      <button
+        *ngIf="signUpClicked"
+        mat-button
+        color="primary"
+        class="login-page__login-button my-3"
+        (click)="signUpSwitch()"
+      >
+        Go back to log in
+      </button>
+    </div>
+  </form>
 </div>
 
 <ng-template #spinner>
-    <mat-spinner [diameter]="37" color="accent"></mat-spinner>
+  <mat-spinner [diameter]="37" color="accent"></mat-spinner>
 </ng-template>

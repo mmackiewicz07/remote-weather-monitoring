@@ -1,0 +1,63 @@
+<div class="h-100 w-100 d-flex align-items-center justify-content-center">
+  <mat-card class="w-50 h-50">
+    <mat-card-header
+      class="d-flex align-items-start justify-content-between w-100"
+    >
+      <h4 class="pt-4 w-50 d-flex align-items-center ml-2">
+        <mat-icon class="mr-2 route-icon" (click)="goBack()"
+          >arrow_back</mat-icon
+        >Data pomiaru:
+        {{ getDate(mesurement?.time) }}
+      </h4>
+      <div class="w-50 mt-1 d-flex align-items-end justify-content-end">
+        <div class="w-50"></div>
+      </div>
+    </mat-card-header>
+    <mat-card-content class="px-5">
+      <h5 class="pt-4">Twoje pomiary:</h5>
+      <div
+        class="d-flex flex-row align-items-center justify-content-between pt-4"
+      >
+        <span
+          ><b>Średnia temperatura:</b> {{ mesurement?.meanTemperature }}&#xB0;C
+        </span>
+        <span
+          ><b>Wartość max:</b> {{ mesurement?.maxTemperature }}&#xB0;C
+        </span>
+        <span
+          ><b>Wartość min:</b> {{ mesurement?.minTemperature }}&#xB0;C
+        </span>
+      </div>
+      <div
+        class="d-flex flex-row align-items-center justify-content-between pt-4"
+      >
+        <span
+          ><b>Średnie ciśnienie:</b> {{ mesurement?.meanPressure }} hPa
+        </span>
+        <span><b>Wartość max:</b> {{ mesurement?.maxPressure }} hPa </span>
+        <span><b>Wartość min:</b> {{ mesurement?.minPressure }} hPa </span>
+      </div>
+      <div
+        class="d-flex flex-row align-items-center justify-content-between pt-4"
+      >
+        <span><b>Średnia wilgotność:</b> {{ mesurement?.meanHumidity }}%</span>
+        <span><b>Wartość max:</b> {{ mesurement?.maxHumidity }}% </span>
+        <span><b>Wartość min:</b> {{ mesurement?.minHumidity }}% </span>
+      </div>
+      <div
+        class="d-flex flex-row align-items-center justify-content-between pt-4"
+      >
+        <span
+          ><b>Średnie natężenie światła:</b> {{ mesurement?.meanPhoto }}</span
+        >
+        <span><b>Wartość max:</b> {{ mesurement?.maxPhoto }} </span>
+        <span><b>Wartość min:</b> {{ mesurement?.minPhoto }} </span>
+      </div>
+      <div
+        class="d-flex flex-row align-items-center justify-content-between pt-4"
+      >
+        <span><b>Poziom szkodliwych gazów:</b> {{ calculateSmoke() }}</span>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

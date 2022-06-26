@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { MeasurementsHistoryComponent } from './measurements-history.component';
 
@@ -8,9 +9,9 @@ describe('MeasurementsHistoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MeasurementsHistoryComponent ]
-    })
-    .compileComponents();
+      declarations: [MeasurementsHistoryComponent],
+      imports: [RouterTestingModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

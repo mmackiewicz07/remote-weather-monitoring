@@ -13,16 +13,20 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireDatabaseModule, USE_EMULATOR } from '@angular/fire/compat/database';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { UserComponent } from './user/user.component';
 import { MeasurementsModule } from './measurements/measurements.module';
 import { MeasurementsHistoryComponent } from './measurements-history/measurements-history.component';
+import { MeasurmenthistoryDetailsComponent } from './measurements-history/measurment-history-details/measurment-history-details.component';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { MeasurementsStore } from './measurements-history/measurment-history-details/measurements-store.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    MeasurementsHistoryComponent
+    MeasurementsHistoryComponent,
+    MeasurmenthistoryDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,22 +39,22 @@ import { MeasurementsHistoryComponent } from './measurements-history/measurement
     HttpClientModule,
     MeasurementsModule,
     AngularFireModule.initializeApp({
-      apiKey: "AIzaSyC4QjmNWMTP9TNjGC1TGdOfzuej3GVGSEU",
-      authDomain: "remote-weather-monitoring.firebaseapp.com",
-      databaseURL: "https://remote-weather-monitoring-default-rtdb.europe-west1.firebasedatabase.app",
-      projectId: "remote-weather-monitoring",
-      storageBucket: "remote-weather-monitoring.appspot.com",
-      messagingSenderId: "1020522371565",
-      appId: "1:1020522371565:web:6a30d09665515ae34e2fe4",
-      measurementId: "G-W2HZR78LJT"
+      apiKey: 'AIzaSyC4QjmNWMTP9TNjGC1TGdOfzuej3GVGSEU',
+      authDomain: 'remote-weather-monitoring.firebaseapp.com',
+      databaseURL:
+        'https://remote-weather-monitoring-default-rtdb.europe-west1.firebasedatabase.app',
+      projectId: 'remote-weather-monitoring',
+      storageBucket: 'remote-weather-monitoring.appspot.com',
+      messagingSenderId: '1020522371565',
+      appId: '1:1020522371565:web:6a30d09665515ae34e2fe4',
+      measurementId: 'G-W2HZR78LJT',
     }),
     AngularFireDatabaseModule,
+    AngularFirestoreModule,
     EffectsModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
-
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [MeasurementsStore],
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -4,13 +4,16 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public mobileQuery!: MediaQueryList;
   private _mobileQueryListener!: () => void;
 
-  constructor(public changeDetectorRef: ChangeDetectorRef, public media: MediaMatcher) { }
+  constructor(
+    public changeDetectorRef: ChangeDetectorRef,
+    public media: MediaMatcher
+  ) {}
 
   public ngOnInit(): void {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
@@ -21,9 +24,4 @@ export class HomeComponent implements OnInit, OnDestroy {
   public ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-
-  public dupa(): void {
-    console.log('gfsd');
-  }
-
 }

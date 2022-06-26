@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store';
 
 import { UserComponent } from './user.component';
 
@@ -8,9 +10,9 @@ describe('UserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UserComponent ]
-    })
-    .compileComponents();
+      declarations: [UserComponent],
+      imports: [StoreModule.forRoot({}), ReactiveFormsModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -21,5 +23,9 @@ describe('UserComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have deafult state value', () => {
+    expect(component.user).toBeUndefined();
   });
 });

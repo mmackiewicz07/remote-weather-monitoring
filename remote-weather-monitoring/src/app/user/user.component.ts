@@ -11,25 +11,23 @@ import { resetPasswordStateError } from 'src/core/pages/login-page/store/auth-st
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-
   public user!: any;
   public showInput = false;
   public form!: FormGroup;
 
   public resetPasswordError$!: Observable<HttpErrorResponse | undefined>;
 
-
-  constructor(private store: Store<AppStoreState>, public fb: FormBuilder) { }
+  constructor(private store: Store<AppStoreState>, public fb: FormBuilder) {}
 
   public get userCreatedAccount(): string {
-    return moment(+this.user.createdAt).format('DD.MM.YYYY, hh:mm');
+    return moment(+this.user?.createdAt).format('DD.MM.YYYY, hh:mm');
   }
 
   public get userLastLogIn(): string {
-    return moment(+this.user.lastLoginAt).format('DD.MM.YYYY, hh:mm');
+    return moment(+this.user?.lastLoginAt).format('DD.MM.YYYY, hh:mm');
   }
 
   public ngOnInit(): void {
@@ -42,12 +40,14 @@ export class UserComponent implements OnInit {
   }
 
   public changeUserPassword(): void {
-    this.store.dispatch(authActions.resetPassword.send({ payload: this.form.value.email }));
+    this.store.dispatch(
+      authActions.resetPassword.send({ payload: this.form.value.email })
+    );
   }
 
   private userForm(): void {
     this.form = this.fb.group({
-      email: ''
-    })
+      email: '',
+    });
   }
 }

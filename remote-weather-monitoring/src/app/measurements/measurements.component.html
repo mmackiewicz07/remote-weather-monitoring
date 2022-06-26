@@ -1,74 +1,115 @@
 <div class="h-100 w-100 p-4">
-    <h3>Aktualne pomiary</h3>
-    <div class="w-100 h-100 d-flex flex-row">
-        <div class="w-50 h-75 m-2 d-flex flex-column">
-            <mat-card class="w-100 h-100">
-                <mat-card-header class="d-flex align-items-start justify-content-between w-100">
-                    <h4 class="pt-4 w-50">Dzisiejsza data: {{currentDate}}</h4>
-                    <div class="w-50 mt-1 d-flex align-items-end justify-content-end">
-                        <div class="w-50"
-                            [ngClass]="{'rain': (humidityValue?.value > 60), 'sun': (temperatureValue?.value > 20), 'snow': (temperatureValue?.value < 20)}">
-                        </div>
-                    </div>
-                </mat-card-header>
-                <mat-card-content class="px-5">
-                    <h5 class="pt-4">Twoje pomiary:</h5>
-                    <div class="d-flex flex-row align-items-center justify-content-between pt-4">
-                        <span><b>Temperatura:</b> {{temperatureValue?.value}} &#xB0;C </span>
-                        <span class="ml-3">ostatnia aktualizacja: {{temperatureValue?.time}}</span>
-                    </div>
-                    <div class="d-flex flex-row align-items-center justify-content-between pt-4">
-                        <span><b>Ciśnienie:</b> {{pressureValue?.value / 100}} hPa </span>
-                        <span class="ml-3">ostatnia aktualizacja: {{pressureValue?.time}}</span>
-                    </div>
-                    <div class="d-flex flex-row align-items-center justify-content-between pt-4">
-                        <span><b>Wilgotność:</b> {{humidityValue?.value}}% </span>
-                        <span class="ml-3">ostatnia aktualizacja: {{humidityValue?.time}}</span>
-                    </div>
-                    <div class="d-flex flex-row align-items-center justify-content-between pt-4">
-                        <span><b>Natężenie światła:</b> {{photoresistorValue?.value}}</span>
-                        <span class="ml-3">ostatnia aktualizacja: {{photoresistorValue?.time}}</span>
-                    </div>
-                    <div class="d-flex flex-row align-items-center justify-content-between pt-4">
-                        <span><b>Poziom szkodliwych gazów:</b> {{calculateSmoke()}} </span>
-                        <span class="ml-3">ostatnia aktualizacja: {{smokeValue?.time}}</span>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-            <mat-card class="d-flex flex-row align-items-center justify-content-center h-50 w-100 mt-2">
-                <mat-icon class="pr-5">info</mat-icon>
-                <span>{{generateMessage()}}</span>
-            </mat-card>
-        </div>
-        <mat-card class="w-50 h-100 m-2">
-            <mat-card-header>
-                <h4 class="pt-4">Wykres pomiarów</h4>
-            </mat-card-header>
-            <mat-card-content class="w-100 px-5 d-flex flex-column align-items-center justify-content-center">
-                <div class="w-100 h-50 d-flex flex-row align-items-center justify-content-center">
-                    <div width="400" height="400">
-                        <canvas id="photoresistorChart"> {{photoChart}}</canvas>
-                    </div>
-                    <div width="400" height="400">
-                        <canvas id="humidityChart"> {{humidityChart}}</canvas>
-                    </div>
-
-                </div>
-                <div class="w-100 h-50 d-flex flex-row align-items-center justify-content-center">
-                    <div width="400" height="400">
-                        <canvas id="pressureChart"> {{pressureChart}}</canvas>
-                    </div>
-                    <div width="400" height="400">
-                        <canvas id="smokeChart"> {{smokeChart}}</canvas>
-                    </div>
-                </div>
-                <div class="w-100 h-50 d-flex align-items-center justify-content-center">
-                    <div width="400" height="400">
-                        <canvas id="temperatureChart"> {{temperatureChart}}</canvas>
-                    </div>
-                </div>
-            </mat-card-content>
-
-        </mat-card>
+  <h3>Aktualne pomiary</h3>
+  <div class="w-100 h-100 d-flex flex-row">
+    <div class="w-50 h-75 m-2 d-flex flex-column">
+      <mat-card class="w-100 h-100">
+        <mat-card-header
+          class="d-flex align-items-start justify-content-between w-100"
+        >
+          <h4 class="pt-4 w-50">Dzisiejsza data: {{ currentDate }}</h4>
+          <div class="w-50 mt-1 d-flex align-items-end justify-content-end">
+            <div
+              class="w-50"
+              [ngClass]="{
+                rain: humidityValue?.value > 60,
+                sun: temperatureValue?.value > 20,
+                snow: temperatureValue?.value < 20
+              }"
+            ></div>
+          </div>
+        </mat-card-header>
+        <mat-card-content class="px-5">
+          <h5 class="pt-4">Twoje pomiary:</h5>
+          <div
+            class="d-flex flex-row align-items-center justify-content-between pt-4"
+          >
+            <span
+              ><b>Temperatura:</b> {{ temperatureValue?.value }} &#xB0;C
+            </span>
+            <span class="ml-3"
+              >ostatnia aktualizacja: {{ temperatureValue?.time }}</span
+            >
+          </div>
+          <div
+            class="d-flex flex-row align-items-center justify-content-between pt-4"
+          >
+            <span><b>Ciśnienie:</b> {{ pressureValue?.value }} </span>
+            <span class="ml-3"
+              >ostatnia aktualizacja: {{ pressureValue?.time }}</span
+            >
+          </div>
+          <div
+            class="d-flex flex-row align-items-center justify-content-between pt-4"
+          >
+            <span><b>Wilgotność:</b> {{ humidityValue?.value }}% </span>
+            <span class="ml-3"
+              >ostatnia aktualizacja: {{ humidityValue?.time }}</span
+            >
+          </div>
+          <div
+            class="d-flex flex-row align-items-center justify-content-between pt-4"
+          >
+            <span
+              ><b>Natężenie światła:</b> {{ photoresistorValue?.value }}</span
+            >
+            <span class="ml-3"
+              >ostatnia aktualizacja: {{ photoresistorValue?.time }}</span
+            >
+          </div>
+          <div
+            class="d-flex flex-row align-items-center justify-content-between pt-4"
+          >
+            <span
+              ><b>Poziom szkodliwych gazów:</b> {{ calculateSmoke() }}
+            </span>
+            <span class="ml-3"
+              >ostatnia aktualizacja: {{ smokeValue?.time }}</span
+            >
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card
+        class="d-flex flex-row align-items-center justify-content-center h-50 w-100 mt-2"
+      >
+        <mat-icon class="pr-5">info</mat-icon>
+        <span>{{ generateMessage() }}</span>
+      </mat-card>
     </div>
+    <mat-card class="w-50 h-100 m-2">
+      <mat-card-header>
+        <h4 class="pt-4">Wykres pomiarów</h4>
+      </mat-card-header>
+      <mat-card-content
+        class="w-100 px-5 d-flex flex-column align-items-center justify-content-center"
+      >
+        <div
+          class="w-100 h-50 d-flex flex-row align-items-center justify-content-center"
+        >
+          <div width="400" height="400">
+            <canvas id="photoresistorChart"> {{ photoChart }}</canvas>
+          </div>
+          <div width="400" height="400">
+            <canvas id="humidityChart"> {{ humidityChart }}</canvas>
+          </div>
+        </div>
+        <div
+          class="w-100 h-50 d-flex flex-row align-items-center justify-content-center"
+        >
+          <div width="400" height="400">
+            <canvas id="pressureChart"> {{ pressureChart }}</canvas>
+          </div>
+          <div width="400" height="400">
+            <canvas id="smokeChart"> {{ smokeChart }}</canvas>
+          </div>
+        </div>
+        <div
+          class="w-100 h-50 d-flex align-items-center justify-content-center"
+        >
+          <div width="400" height="400">
+            <canvas id="temperatureChart"> {{ temperatureChart }}</canvas>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
